@@ -1,3 +1,3 @@
 **Sway**
 --------
-![20250427_16h12m33s_grim](https://github.com/user-attachments/assets/1fd7c2eb-1b5d-4fd3-8f75-01f878f27f34)
+![20250427_19h21m59s_grim](https://github.com/user-attachments/assets/086c4b45-c6f1-44ba-ab64-7545a2b32d20)
