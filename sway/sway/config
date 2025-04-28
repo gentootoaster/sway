@@ -19,7 +19,7 @@ set $term kitty
 set $menu dmenu_run
 
 # Font
-font pango: JetBrains Mono Nerd Font 13
+font pango: Adwaita Mono 13
 
 # Input
 input "type:keyboard" {
@@ -28,7 +28,7 @@ input "type:keyboard" {
 }
 
 # Custom shorcuts
-bindsym Shift+ctrl+l exec swaylock -i /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png
+bindsym Shift+ctrl+l exec swaylock -i ~/wallpapers/railway.jpg
 
 # Gaps & borders
 smart_gaps on
@@ -39,9 +39,9 @@ gaps outer 5
 
 default_border pixel 3
 
-client.focused #285577 #285577 #285577 #285577
-client.focused_inactive #1e1e1e #1e1e1e #1e1e1e #1e1e1e
-client.unfocused #1e1e1e #1e1e1e #1e1e1e #1e1e1e
+client.focused #235577 #235577 #235577 #235577
+client.focused_inactive #181818 #181818 #181818 #181818
+client.unfocused #181818 #181818 #181818 #181818
 client.urgent #fe2019 #fe2019 #fe2019 #fe2019
 
 # Tabbed by default
@@ -51,7 +51,8 @@ client.urgent #fe2019 #fe2019 #fe2019 #fe2019
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+#output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg ~/wallpapers/railway.jpg fill
 #
 # Example configuration:
 #
@@ -235,7 +236,7 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
     # Special key to take a screenshot with grim
-    bindsym Print exec grim && notify-send "Screenshot has been saved to ~/Pictures"
+    bindsym Print exec grim -g "$(slurp)" - | swappy -f - 
 
 #
 # Status Bar:
@@ -243,17 +244,19 @@ bindsym $mod+r mode "resize"
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position bottom
-    tray_output none
-  
+    #tray_output none
+    workspace_min_width 35   
+
     # When the status_command prints a new line to stdout, swaybar updates.
     # The default just shows the current date and time.
     status_command while ~/.config/sway/status.sh; do sleep 1; done
-
+    #status_command i3status   
+ 
     colors {
         statusline #ffffff
-        background #1e1e1e
-        inactive_workspace #1e1e1e #1e1e1e #5c5c5c
-        focused_workspace #285577 #285577 #ffffff
+        background #181818
+        inactive_workspace #181818 #181818 #5c5c5c
+        focused_workspace #275374 #275374 #ffffff
         urgent_workspace #fe2019 #fe1019 #ffffff
     }
 }
