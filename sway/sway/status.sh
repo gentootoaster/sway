@@ -34,7 +34,7 @@ ram_free=$(free -m | awk '/Mem:/ {print $4}')
 ram_percent=$(( ram_used * 100 / ram_total ))
 
 if [ $ram_percent -lt 25 ]; then
-    ram_color="#25ad76"  
+    ram_color="#ffffff"  
 elif [ $ram_percent -lt 75 ]; then
     ram_color="#f5a623"  
 else
@@ -68,7 +68,7 @@ if [[ -n "$active_connection" ]]; then
     network_speed=$(get_network_speed)
     if echo "$active_connection" | grep -q "ethernet"; then
         net="ETH $network_speed"
-    elif echo "$active_connection" | grep -q "wifi"; then
+    elif echo "$active_connection" | grep -q "wireless"; then
         SSID=$(nmcli -t -f active,ssid dev wifi | egrep '^yes' | cut -d':' -f2)
         net="WiFi $SSID $network_speed"
     fi
