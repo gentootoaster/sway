@@ -37,15 +37,32 @@ client.focused_inactive #181818 #181818 #181818 #181818
 client.unfocused #181818 #181818 #181818 #181818
 client.urgent #fe2019 #fe2019 #fe2019 #fe2019
 
-############################
-### Output configuration ###
-############################
+##############
+### Output ###
+##############
 
 # --- Wallpapers ---
 output * bg ~/wallpapers/railway.jpg fill
 
 # --- Display ---
-output HDMI-A-2 mode 1920x1080@75Hz 
+output eDP-1 mode 1920x1080@60Hz scale 1.2 
+
+#############
+### Input ###
+#############
+
+# --- Keyboard ---
+input "type:keyboard" {
+    xkb_layout us,ru
+    xkb_options grp:ctrl_space_toggle
+}
+
+# --- Touchpad ---
+input "1739:32382:DELL0740:00_06CB:7E7E_Touchpad" {
+    dwt enabled
+    tap enabled
+    middle_emulation enabled
+}
 
 ####################
 ### Key bindings ###
@@ -146,33 +163,24 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # --- Utilities ---
-bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle && notify-send "Mute toggle"
-bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5% && notify-send $(pamixer --get-volume)%
-bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5% && notify-send $(pamixer --get-volume)%
+bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle && notify-send "mute toggle"
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5% && notify-send "vol $(pamixer --get-volume)%"
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5% && notify-send "vol $(pamixer --get-volume)%"
 bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle 
     
-bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
-bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%- && notify-send "bri $(brightnessctl | grep 'brightness' | awk '{print $4}' | tr -d '()')"
+bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+ && notify-send "bri $(brightnessctl | grep 'brightness' | awk '{print $4}' | tr -d '()')"
    
 bindsym Print exec grim -g "$(slurp)" - | swappy -f - 
 
 bindsym Shift+ctrl+l exec swaylock -i ~/wallpapers/railway.jpg
-
-#############
-### Input ###
-#############
-
-input "type:keyboard" {
-    xkb_layout us,ru
-    xkb_options grp:ctrl_space_toggle
-}
 
 ##################
 ### Status Bar ###
 ##################
 
 bar {
-    position bottom
+    position top
     workspace_min_width 35   
 
     status_command while ~/.config/sway/status.sh; do sleep 1; done
